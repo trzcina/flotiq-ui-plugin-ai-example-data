@@ -1,8 +1,33 @@
-@font-face {
-  font-family: 'Roboto Mono';
-  src: url(./RobotoMono-Medium.ttf) format('truetype');
+.ai-example-content-panel {
+  display: grid;
+  gap: 8px;
+  padding: 12px 0;
 }
 
-.plugin-name-cell-renderer {
-  font-family: 'Roboto Mono', monospace;
+.ai-example-content-button {
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: #fff;
+  background: #087ea4;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-example-content-button:hover:not(:disabled) {
+  background: #05617f;
+}
+
+.ai-example-content-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.ai-example-content-status {
+  margin: 0;
+  color: #b42318;
+  font-size: 0.875rem;
+  line-height: 1.35;
 }
