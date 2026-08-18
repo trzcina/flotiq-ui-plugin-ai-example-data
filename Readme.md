@@ -1,64 +1,38 @@
-<a href="https://flotiq.com/">
-    <img src="https://editor.flotiq.com/fonts/fq-logo.svg" alt="Flotiq logo" title="Flotiq" align="right" height="60" />
-</a>
+# AI Example Content
 
-# Plain JS Plugin template
+This Flotiq UI plugin adds an AI example-content action to the sidebar of every create-object form. It uses OpenAI to generate values based on the current Content Type Definition and optionally tailored to your project description.
 
-## Quick start
+![AI Example Content plugin in the Flotiq create-object form](assets/screenshot.png)
 
-1. `yarn` - to install dependencies
-2. `yarn start` - to start development mode - rebuild on file modifications
-3. update your `plugin-manifest.json` file to contain the production URL and other plugin information
-4. `yarn build` - to build plugins
+## Configuration
 
-## Dev environment
+Open the plugin settings in Flotiq and configure:
+- **OpenAI API key** - required OpenAI project API key.
+- **Project description** - optional context that shapes the generated content.
 
-Dev environment is configured to use:
+The key is read only at runtime from plugin settings. Because this plugin calls OpenAI from the browser, use a restricted, revocable project key with a spend limit. Do not use an unrestricted personal or organization key.
 
-- `prettier` - best used with automatic format on save in IDE, remember to run `yarn format` before commiting changes
-- `eslint` - it is built into both `start` and `build` commands
+## Usage
 
-## Output
+1. Open the form for creating a new object.
+2. Select **Generate example content** in the sidebar.
+3. Review and edit the populated values as needed.
+4. Select **Generate again** to replace the supported values with a new, varied example.
+5. Submit the form normally when the result is ready.
 
-The plugins are built into a single `dist/index.js` file. The manifest is copied to `dist/plugin-manifest.json` file.
+The generator supports string text, richtext, number, integer, boolean, date, and datetime fields. It leaves media, relations, and unsupported custom field types unchanged. The plugin never creates or submits a content object itself.
 
-## Deployment
+## Local development
 
-<!-- TO DO -->
+```bash
+yarn install
+yarn start
+```
 
-## Loading the plugin
+Load `https://localhost:3053/plugin-manifest.json` in Flotiq after trusting the local development certificate. For a production installation, host the built `dist/index.js` and `dist/plugin-manifest.json` over HTTPS, then update the `url` in [plugin-manifest.json](plugin-manifest.json) before building.
 
-**Warning:** While developing, you can use `https://localhost:3053/plugin-manifest.json` address to load the plugin manifest. Make sure your browser trusts the local certificate on the latter, to be able to use it e.g. with `https://editor.flotiq.com`
+Build the distributable bundle with:
 
-### URL
-
-**Hint**: You can use localhost url from development mode `https://localhost:3053/index.js`
-
-1. Open Flotiq editor
-2. Open Chrome Dev console
-3. Execute the following script
-   ```javascript
-   FlotiqPlugins.loadPlugin('plugin-id', '<URL TO COMPILED JS>');
-   ```
-4. Navigate to the view that is modified by the plugin
-
-### Directly
-
-1. Open Flotiq editor
-2. Open Chrome Dev console
-3. Paste the content of `dist/index.js`
-4. Navigate to the view that is modified by the plugin
-
-### Deployment
-
-**Hint**: You can use localhost url from development mode `https://localhost:3053/plugin-manifest.json`
-
-1. Open Flotiq editor
-2. Add a new plugin and paste the URL to the hosted `plugin-manifest.json` file
-3. Navigate to the view that is modified by the plugin
-
-## Collaborating
-
-If you wish to talk with us about this project, feel free to hop on our [![Discord Chat](https://img.shields.io/discord/682699728454025410.svg)](https://discord.gg/FwXcHnX).
-
-If you found a bug, please report it in [issues](https://github.com/flotiq/flotiq-ui-plugin-templates-plain-js/issues).
+```bash
+yarn build
+```
